@@ -12,6 +12,7 @@ class AccountSerializer(ModelSerializer):
             "last_name",
             "username",
             "email",
+            "password",
             "zip_code",
             "street",
             "city",
@@ -19,6 +20,7 @@ class AccountSerializer(ModelSerializer):
             "created_at",
             "updated_at",
         ]
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         return AccountModel.objects.create_user(**validated_data)
