@@ -26,7 +26,7 @@ class CreateAccountRouteTests(APITestCase):
         THEN I receive the correct error message
         THEN I creceive the status code 400
         """
-        required_fields = ["username", "email", "pasword", "zip_code", "city", "state"]
+        required_fields = ["username", "email", "password", "zip_code", "city", "state"]
 
         for required_field in required_fields:
             data = {
@@ -37,11 +37,11 @@ class CreateAccountRouteTests(APITestCase):
 
             response = self.client.post(self.url, data, format="json")
 
-        self.assertEqual(response.headers["Content-Type"], "application/json")
-        self.assertRegex(
-            f"{response.json()}", f"^.*({required_field})+.*(required)+.*$"
-        )
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+            self.assertEqual(response.headers["Content-Type"], "application/json")
+            self.assertRegex(
+                f"{response.json()}", f"^.*({required_field})+.*(required)+.*$"
+            )
+            self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_account_incorrect_zip_code(self):
         """
