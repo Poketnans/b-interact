@@ -24,7 +24,7 @@ class CreateAccountRouteTests(APITestCase):
         GIVEN create account route
         WHEN I make a request with missing required fields
         THEN I receive the correct error message
-        THEN I creceive the status code 400
+        THEN I creceive the status code 400 - Bad Request
         """
         required_fields = ["username", "email", "password", "zip_code", "city", "state"]
 
@@ -43,12 +43,12 @@ class CreateAccountRouteTests(APITestCase):
             )
             self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_create_account_incorrect_zip_code(self):
+    def test_create_account_incorrect_zip_code_format(self):
         """
         GIVEN create account route
         WHEN I make a request with malformed zip code
         THEN I receive the correct error message
-        THEN I receive the status code 400
+        THEN I receive the status code 400 - Bad Request
         """
         data = self.account_data.copy()
 
@@ -66,12 +66,31 @@ class CreateAccountRouteTests(APITestCase):
 
             self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_create_account_invalid_zip_code(self):
+        """
+        GIVEN create account route
+        WHEN I make a request with invalid zip code
+        THEN I receive correct error response
+        THEN I receive the status code 422 - Unprocessable Entity
+        """
+
+        data = self.account_data.copy()
+        data["zip_code"] = 12345678
+
+        expected_response = {"error": "Invalid zip code."}
+
+        response = self.client.post(self.url, data, format="json")
+
+        self.assertEqual(response.headers["Content-Type"], "application/json")
+        self.assertEqual(response.json(), expected_response)
+        self.assertEqual(response.status_code, status.HTTP_422_UNPROCESSABLE_ENTITY)
+
     def test_create_account(self):
         """
         GIVEN create account route
         WHEN I make a request with correct payload
-        THEN I receive correnct success response
-        THEN I receive the status code 201
+        THEN I receive correct success response
+        THEN I receive the status code 201 - Created
         """
 
         expected_fields = {
