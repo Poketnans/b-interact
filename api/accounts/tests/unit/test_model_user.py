@@ -19,14 +19,6 @@ class AccountModelModelTests(APITestCase):
         "updated_at",
     ]
 
-    @classmethod
-    def setUpTestData(cls) -> None:
-        try:
-            models = __import__("accounts.models", fromlist=["models"])
-            cls.account_model = getattr(models, "AccountModel")
-        except ImportError:
-            raise AssertionError("Class User not found in project.")
-
     def test_account_model_has_correct_fields_names(self):
         """
         GIVEN the Account model
@@ -35,7 +27,7 @@ class AccountModelModelTests(APITestCase):
         """
         model_fieldnames = [
             field.name
-            for field in self.account_model._meta.get_fields()
+            for field in AccountModel._meta.get_fields()
             if hasattr(fields, field.__class__.__name__)
         ]
         user_has_all_required_fields = all(
@@ -68,6 +60,4 @@ class AccountModelModelTests(APITestCase):
             "updated_at": fields.DateTimeField,
         }
         for field_name, field_type in fields_to_check_type.items():
-            self.assertIsInstance(
-                self.account_model._meta.get_field(field_name), field_type
-            )
+            self.assertIsInstance(AccountModel._meta.get_field(field_name), field_type)
