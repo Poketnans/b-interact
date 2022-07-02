@@ -1,3 +1,4 @@
+from accounts.models import AccountModel
 from django.db.models import fields
 from rest_framework.test import APITestCase
 
@@ -7,9 +8,13 @@ class AccountModelModelTests(APITestCase):
         "id",
         "first_name",
         "last_name",
+        "username",
         "email",
+        "password",
         "zip_code",
-        "address",
+        "street",
+        "city",
+        "state",
         "created_at",
         "updated_at",
     ]
@@ -56,7 +61,9 @@ class AccountModelModelTests(APITestCase):
             "last_name": fields.CharField,
             "email": fields.EmailField,
             "zip_code": fields.CharField,
-            "address": fields.CharField,
+            "street": fields.CharField,
+            "city": fields.CharField,
+            "state": fields.CharField,
             "created_at": fields.DateTimeField,
             "updated_at": fields.DateTimeField,
         }
