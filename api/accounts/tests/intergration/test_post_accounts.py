@@ -77,7 +77,7 @@ class CreateAccountRouteTests(APITestCase):
         data = self.account_data.copy()
         data["zip_code"] = 12345678
 
-        expected_response = {"error": "Invalid zip code."}
+        expected_response = {"zip_code": ["Invalid zip code."]}
 
         response = self.client.post(self.url, data, format="json")
 
