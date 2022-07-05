@@ -59,15 +59,13 @@ export const UserAuthProvider = ({ children }: UserAuthProps) => {
           });
         })
         .catch((error: AxiosError<IUserRegisterError>) => {
-          Object.values(error.response?.data as object).forEach((value) => {
-            toast({
-              position: "top",
-              title: "Erro ao se Cadastrar!",
-              description: value,
-              status: "error",
-              duration: 4000,
-              isClosable: true,
-            });
+          toast({
+            position: "top",
+            title: "Erro ao se cadastrar!",
+            description: error.code == "ERR_NETWORK" && "Problemas de conexão!",
+            status: "error",
+            duration: 4000,
+            isClosable: true,
           });
 
           throw error;

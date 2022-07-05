@@ -6,6 +6,7 @@ import {
   Input as ChakraInput,
   InputLeftElement,
   InputGroup,
+  HStack,
 } from "@chakra-ui/react";
 
 import { useState, useEffect, useCallback } from "react";
@@ -21,7 +22,7 @@ const inputVariation: inputVariationOptions = {
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { name, label, error = null, icon: Icon, ...rest },
+  { name, label, error = null, icon: Icon, isRequired, ...rest },
   ref
 ) => {
   const [value, setValue] = useState("");
@@ -44,16 +45,19 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   }, [error, value]);
 
   return (
-    <FormControl marginBottom="0px" isInvalid={!!error}>
-      {!!label && (
-        <FormLabel mb="0px" color="text">
-          {label}
-        </FormLabel>
-      )}
+    <FormControl marginBottom="0px" isInvalid={!!error} {...{ isRequired }}>
+      <HStack justifyContent={"space-between"}>
+        {!!label && (
+          <FormLabel mb="0px" color="text">
+            {label}
+          </FormLabel>
+        )}
+        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      </HStack>
 
       <InputGroup flexDirection="column">
         {Icon && (
-          <InputLeftElement color={"placeholder"} mt="2.5">
+          <InputLeftElement color={"placeholder"}>
             <Icon />
           </InputLeftElement>
         )}
@@ -68,7 +72,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
             boxShadow: "0 0 0 1px #67A277",
           }}
           size="lg"
-          h={["50px", "60px", "60px"]}
+          h={["50px", "60px", "40px"]}
           color={inputVariation[variation]}
           borderColor={inputVariation[variation]}
           ref={ref}
@@ -76,8 +80,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           onBlurCapture={handleInputBlur}
           onChangeCapture={(e) => setValue(e.currentTarget.value)}
           {...rest}
-        />
-        {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+        ></ChakraInput>
       </InputGroup>
     </FormControl>
   );

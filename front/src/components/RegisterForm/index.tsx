@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Text, Box, Stack, Button } from "@chakra-ui/react";
+import { Flex, Text, Box, Stack, Button, HStack } from "@chakra-ui/react";
 import { Input } from "../../components/Input";
 
 import { useUserAuth } from "../../providers/UserAuth";
@@ -23,8 +23,8 @@ export const RegisterUser = () => {
   } = useForm<RegisterUserData>({
     resolver: yupResolver(registerUserSchema),
   });
-
-  const [address, setAddress] = React.useState<IAddress>({});
+  const [city, setCity] = React.useState("");
+  const [uf, setUF] = React.useState("");
 
   const checkZipHandler: React.FocusEventHandler<HTMLInputElement> = ({
     target: { value },
@@ -36,12 +36,25 @@ export const RegisterUser = () => {
     checkZipCode(value)
       .then(({ localidade, uf }) => {
         clearErrors("zip_code");
-        setAddress({ city: localidade, state: uf });
+        setCity(localidade);
+        setUF(uf);
       })
       .catch(() => {
         console.error("Deu ruin");
         setError("zip_code", errorInfo);
       });
+  };
+
+  const handleCityChange: React.FocusEventHandler<HTMLInputElement> = ({
+    target: { value },
+  }) => {
+    setCity(value);
+  };
+
+  const handleUFChange: React.FocusEventHandler<HTMLInputElement> = ({
+    target: { value },
+  }) => {
+    setUF(value);
   };
 
   const handleRegisterUser: SubmitHandler<RegisterUserData> = (data) => {
@@ -87,25 +100,22 @@ export const RegisterUser = () => {
             </Text>
           </Flex>
         </Flex>
-        <Box w="100%">
+        <HStack w="100%">
           <Input
-            placeholder="Nome"
-            label={"Nome Completo:"}
+            label={"Nome:"}
             type="text"
             error={errors.first_name}
             {...register("first_name")}
           />
-        </Box>
-
-        <Box w="100%">
           <Input
-            placeholder="Sobrenome"
             label={"Sobrenome:"}
             type="text"
             error={errors.last_name}
             {...register("last_name")}
           />
-        </Box>
+        </HStack>
+
+        <Box w="100%"></Box>
 
         <Box w="100%">
           <Input
@@ -118,7 +128,6 @@ export const RegisterUser = () => {
 
         <Box w="100%">
           <Input
-            placeholder="Email"
             label={"Email:"}
             type="email"
             error={errors.email}
@@ -129,7 +138,6 @@ export const RegisterUser = () => {
 
         <Box w="100%">
           <Input
-            placeholder="Senha"
             label={"Senha:"}
             type="password"
             error={errors.password}
@@ -140,7 +148,6 @@ export const RegisterUser = () => {
 
         <Box w="100%">
           <Input
-            placeholder="Confirmação de Senha"
             label={"Confirmação de Senha:"}
             type="password"
             error={errors.passwordTwo}
@@ -149,20 +156,37 @@ export const RegisterUser = () => {
           />
         </Box>
 
-        <Box w="100%">
+        <HStack w="100%">
           <Input
-            placeholder="12345678"
             label={"CEP:"}
             type="text"
             error={errors.zip_code}
             {...register("zip_code", { onBlur: checkZipHandler })}
             icon={FaLock}
           />
+          <Input
+            label={"UF:"}
+            type="text"
+            error={errors.state}
+            {...register("state", { onChange: handleUFChange })}
+            icon={FaLock}
+            value={uf}
+          />
+        </HStack>
+
+        <Box w="100%">
+          <Input
+            label={"Cidade:"}
+            type="text"
+            error={errors.city}
+            {...register("city", { onChange: handleCityChange })}
+            icon={FaLock}
+            value={city}
+          />
         </Box>
 
         <Box w="100%">
           <Input
-            placeholder="Rua dos Flamboyants"
             label={"Rua:"}
             type="text"
             error={errors.street}
@@ -171,29 +195,7 @@ export const RegisterUser = () => {
           />
         </Box>
 
-        <Box w="100%">
-          <Input
-            placeholder="Cidade"
-            label={"Cidade:"}
-            type="text"
-            error={errors.city}
-            {...register("city")}
-            icon={FaLock}
-            value={address.city ?? ""}
-          />
-        </Box>
-
-        <Box w="100%">
-          <Input
-            placeholder="Estado"
-            label={"Estado:"}
-            type="text"
-            error={errors.state}
-            {...register("state")}
-            icon={FaLock}
-            value={address.state ?? ""}
-          />
-        </Box>
+        <Box w="100%"></Box>
         <Button
           width="100%"
           padding="30px"
