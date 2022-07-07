@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:latest
+    container_name: database
+    env_file: ./api/.env
+    ports:
+      - ${PG_PORT:-5432}:${PG_PORT:-5432}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  migrations:
+    build: ./api
+    env_file: ./api/.env
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py migrate'
+    volumes:
+      - server:/code
+    depends_on:
+      - db
+
+  api:
+    build: ./api
+    container_name: server
+    env_file: ./api/.env
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py runserver 0.0.0.0:8000'
+    volumes:
+      - server:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - migrations
+
+  client:
+    build: ./front
+    container_name: client
+    command: yarn dev
+    volumes:
+      - client:/client
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - migrations
+      - api
+
+volumes:
+  pgdata:
+  server:
+  client:
