@@ -1,5 +1,14 @@
 import * as React from "react";
-import { Flex, Text, Box, Stack, Button, HStack } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Stack,
+  Button,
+  HStack,
+  VStack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Input } from "../../components/Input";
 
 import { useUserAuth } from "../../providers/UserAuth";
@@ -8,8 +17,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { FaEnvelope, FaLock } from "react-icons/fa";
-import { ArrayResp, IAddress, RegisterUserData } from "./interfaces.types";
+import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import { ArrayResp, RegisterUserData } from "./interfaces.types";
 import registerUserSchema from "../../schemas/registerUserSchema";
 
 export const RegisterUser = () => {
@@ -65,14 +74,16 @@ export const RegisterUser = () => {
     });
   };
 
+  const color = useColorModeValue("blue.600", "blue.500");
+  const bgColor = useColorModeValue("blue.600", "blue.500");
+  const hoverbgColor = useColorModeValue("blue.500", "blue.600");
+  const boxShadow = useColorModeValue(
+    "0px 4px 8px 4px rgba(0, 0, 0, 0.25);",
+    ""
+  );
+
   return (
-    <Flex
-      flex="1"
-      justifyContent="center"
-      flexDirection="column"
-      gridGap="10px"
-      alignItems="center"
-    >
+    <VStack flex="1" justifyContent="center">
       <Stack
         as="form"
         onSubmit={handleSubmit(handleRegisterUser)}
@@ -82,7 +93,8 @@ export const RegisterUser = () => {
         spacing={4}
         boxSizing="border-box"
         padding={["10px 20px", "15px 20px", "15px 20px"]}
-        boxShadow="0px 4px 8px 4px rgba(0, 0, 0, 0.25);"
+        boxShadow={boxShadow}
+        borderRadius="5px"
       >
         <Flex
           width="100%"
@@ -95,7 +107,11 @@ export const RegisterUser = () => {
             alignItems="center"
             gridGap="5px"
           >
-            <Text fontSize={["lg", "2xl", "2xl"]} fontWeight="bold">
+            <Text
+              fontSize={["lg", "2xl", "2xl"]}
+              fontWeight="bold"
+              color={color}
+            >
               Cadastro de Usuário
             </Text>
           </Flex>
@@ -123,6 +139,7 @@ export const RegisterUser = () => {
             type="text"
             error={errors.username}
             {...register("username")}
+            icon={FaUser}
           />
         </Box>
 
@@ -162,14 +179,12 @@ export const RegisterUser = () => {
             type="text"
             error={errors.zip_code}
             {...register("zip_code", { onBlur: checkZipHandler })}
-            icon={FaLock}
           />
           <Input
             label={"UF:"}
             type="text"
             error={errors.state}
             {...register("state", { onChange: handleUFChange })}
-            icon={FaLock}
             value={uf}
           />
         </HStack>
@@ -180,7 +195,6 @@ export const RegisterUser = () => {
             type="text"
             error={errors.city}
             {...register("city", { onChange: handleCityChange })}
-            icon={FaLock}
             value={city}
           />
         </Box>
@@ -191,7 +205,6 @@ export const RegisterUser = () => {
             type="text"
             error={errors.street}
             {...register("street")}
-            icon={FaLock}
           />
         </Box>
 
@@ -200,14 +213,14 @@ export const RegisterUser = () => {
           width="100%"
           padding="30px"
           color="baseDefault"
-          bgColor="blue.600"
-          _hover={{ bgColor: "blue.500" }}
+          bgColor={bgColor}
+          _hover={{ bgColor: hoverbgColor }}
           type="submit"
           value=""
         >
           Cadastrar
         </Button>
       </Stack>
-    </Flex>
+    </VStack>
   );
 };
