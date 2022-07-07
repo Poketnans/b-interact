@@ -1,6 +1,6 @@
 import * as React from "react";
 import { VStack, Grid } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "./components/ColorModeSwitcher/ColorModeSwitcher";
+import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
 import { RegisterUser } from "./components/RegisterForm";
 import { AppProvider } from "./providers";
 
