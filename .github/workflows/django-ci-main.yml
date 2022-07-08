@@ -24,13 +24,13 @@ jobs:
         working-directory: ./api
         run: |
           python -m pip install --upgrade pip
-          pip install -r api/requirements.txt
+          pip install -r requirements.txt
       - name: Create Env
         working-directory: ./api
-        run: echo "TEST=True" > api/.env
+        run: echo "TEST=True" > .env
       - name: Create Migrations
         working-directory: ./api
-        run: python api/manage.py makemigrations
+        run: python manage.py makemigrations
       - name: Run Tests
         working-directory: ./api
-        run: python api/manage.py test -v 2
+        run: python manage.py test -v 2
