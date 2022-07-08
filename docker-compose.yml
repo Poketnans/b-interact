@@ -32,11 +32,11 @@ services:
       - migrations
 
   client:
-    build: ./front
+    build: ./client
     container_name: client
     command: yarn start
     volumes:
-      - ./front:/client
+      - ./client:/client
     ports:
       - 3000:3000
 
