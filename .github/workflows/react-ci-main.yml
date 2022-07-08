@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
         working-directory: ./client
-        run: npm ci
+        run: yarn install
       - name: Run Tests
         working-directory: ./client
-        run: npm test
+        run: yarn test
