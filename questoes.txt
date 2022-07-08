@@ -1,0 +1,37 @@
+1. A solução deve ser disponibilizada em Cloud ou On-premise? 
+    A abordagem em nuvem é a mais vantajosa neste caso, dado a facilidade em
+    termos de implantação (infraestrutura e pessoal), escalabilidade e
+    manutenibilidade. A julgar por questões de segurança, talvez a modalidade
+    local seria melhor, já que os dados estariam armazenados em um ambiente mais
+    controlado, mas hoje já possuem serviços híbridos que podem ajudar com um
+    meio termo entre os dois mundos.
+    O caso mostrado no desafio não aparenta envolver dados tão sensíveis.
+    Portanto, ao meu ver, disponibilizar a solução em Cloud seria mais viável.
+
+2. Considerando a participação de 4 pessoas técnicas para o desenvolvimento
+dessa solução, responda qual ferramenta acreditas ser apropriada para o controle
+de tarefas da equipe, a ferramenta é ágil?
+    A ferramenta que utilizaria seria o KAMBAM, pois é uma metodologia ágil
+    que aumenta bastante a eficiência de todos os envolvidos. Desde o
+    responsável pelo acompanhamento até os devs que estarão codando as features.
+
+3. Você se sente capaz de liderar esta equipe? Por quê?
+    Sim, pois consegui entender bem o problema e saber como posso organizar 
+    para que a solução seja desenvolvida de maneira mais eficiente.
+    Apesar de ainda me sentir limitado em termos de conhecimento técnico, já que
+    envolveria conhecimento mais aprofundado em ferramentas de Cloud, entre
+    outras que poderiam ser indispensável para fazer a soluçaõ rodar, isso é
+    algo que pode ser sanado com reuniões de consultoria, etc..
+
+4. Se pudesse sugerir uma melhoria, mudança ou oportunidade. O que seria?
+    Estou satisfeito com o processo. Principalmente com a forma humanizada e
+    realista com que foi construído.
+
+5. Acha válido esse desafio para o processo que está participando?
+    Sim. Gostei bastante do caráter flexível. Acho que essa abordagem é
+    suficientemente favorável ao cantidato mostrar o que realmente sabe.
+    Ademais, o fato de explicar o problema geral, porém solicitando a
+    implementação de uma feature específica, parece simular bem o que geralmente
+    aconteceria numa equipe real, em que pequenas coisas são desenvolvidas de
+    forma individual, mas sendo indispensável o conhecimento do produto final
+    para que a solução seja eficiente e escalável.
