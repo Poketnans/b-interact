@@ -4,7 +4,7 @@
 
 ---
 
-> Status: Em Desenvolvimento ⚠️
+> Status: Concluído ✔️
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Poketnans/metamorfo-tattoo/blob/development/LICENSE)
 
