@@ -37,7 +37,7 @@ Resolvi desenvolver uma aplicação full stack para melhor demonstrar os conheci
 
 ---
 
-O evento de blur do campo CEP realiza o preenchimento automático dos campos de UF e Cidade, caso seja válido:
+O evento de blur do campo CEP dispara uma requisição que realiza o preenchimento automático dos campos de UF e Cidade, caso seja válido:
 
 ![Pesquisa de CEP no evento de blur.](/assets/images/b-interact-cep.gif "Pesquisa de CEP")
 
