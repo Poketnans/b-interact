@@ -12,7 +12,7 @@
 
 ## Sobre o Projeto
 
-Olá, meu nome é Etnan! O **B Interact** é um projeto desenvolvido em um desafio técnico para a candidatura de Software Engineer da **Bemol Digital** em que era necessário desenvolver a feature de criação de usuários para uma empresa que estaria buscando uma forma de unificar a experiência de seus clientes no uso dos seus diversos canais de comunicação disponibilizados.
+Olá, meu nome é Etnan! O **B Interact** é um projeto desenvolvido em um desafio técnico para a candidatura de Software Engineer da [**Bemol Digital**](https://bemoldigital.com.br/) em que era necessário desenvolver a feature de criação de usuários para uma empresa que estaria buscando uma forma de unificar a experiência de seus clientes no uso dos seus diversos canais de comunicação disponibilizados.
 
 Resolvi desenvolver uma aplicação full stack para melhor demonstrar os conhecimentos técnicos.
 
