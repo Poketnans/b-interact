@@ -70,7 +70,7 @@ git clone git@github.com:Poketnans/b-interact.git
 cd b-interact
 ```
 
-### Variáveis de ambiente:
+### Variáveis de ambiente: `./api/.env`
 
 |       Nome        |       Descrição        |   Defaut   |
 | :---------------: | :--------------------: | :--------: |
