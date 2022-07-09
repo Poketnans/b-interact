@@ -1,5 +1,4 @@
 import requests
-from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer
 
 from accounts.exceptions import InvalidZipCodeError
